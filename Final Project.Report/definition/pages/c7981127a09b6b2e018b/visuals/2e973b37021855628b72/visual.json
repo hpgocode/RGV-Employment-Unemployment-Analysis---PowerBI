@@ -1,0 +1,236 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "2e973b37021855628b72",
+  "position": {
+    "x": 846.74584323040381,
+    "y": 161.14014251781472,
+    "z": 5000,
+    "height": 234.10926365795723,
+    "width": 433.25415676959619,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CityTable"
+                    }
+                  },
+                  "Property": "County"
+                }
+              },
+              "queryRef": "CityTable.County",
+              "nativeQueryRef": "County",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CityTable"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "CityTable.City",
+              "nativeQueryRef": "City",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Labor Force"
+                        }
+                      },
+                      "Property": "Labor Force"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(Labor Force.Labor Force)",
+              "nativeQueryRef": "Average of Labor Force"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Employment"
+                        }
+                      },
+                      "Property": "Empolyment"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(Employment.Empolyment)",
+              "nativeQueryRef": "Average of Empolyment"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Unemployment Rate"
+                        }
+                      },
+                      "Property": "Unemployment Rate"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(Unemployment Rate.Unemployment Rate)",
+              "nativeQueryRef": "Average of Unemployment Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employment"
+                    }
+                  },
+                  "Property": "Employment Growth %"
+                }
+              },
+              "queryRef": "Employment.Employment Growth %",
+              "nativeQueryRef": "Employment Growth %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "CityTable"
+                  }
+                },
+                "Property": "County"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "CityTable"
+                  }
+                },
+                "Property": "City"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "CityTable.County"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CityTable"
+                    }
+                  },
+                  "Property": "County"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "CityTable.City"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Hidalgo'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Cameron'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "columnFormatting": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Labor Force.Labor Force)"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

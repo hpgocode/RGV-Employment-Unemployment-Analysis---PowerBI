@@ -1,0 +1,118 @@
+table CityTable
+	lineageTag: 17ca9c36-3624-4f1f-a8f8-601b0bf1f8ff
+
+	measure 'County Unemployment Rate' = AVERAGE('Unemployment Rate'[Unemployment Rate])
+		lineageTag: 476baae4-823c-4275-a534-5debd82be775
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column City
+		lineageTag: ca663d2e-a519-4af1-bd42-df8ecc04551c
+		dataCategory: City
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Employment[City]
+
+		annotation SummarizationSetBy = Automatic
+
+	column County =
+			
+			SWITCH(CityTable[City],
+			    "McAllen", "Hidalgo",
+			    "Edinburg", "Hidalgo",
+			    "Mission", "Hidalgo",
+			    "Pharr", "Hidalgo",
+			    "San Juan", "Hidalgo",
+			    "Weslaco", "Hidalgo",
+			    "Brownsville", "Cameron",
+			    "San Benito", "Cameron",
+			    "Harlingen", "Cameron"
+			)
+		lineageTag: 771dc57a-20d0-4a18-8df4-c8aba3ba4ed3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'County Full' =
+			
+			SWITCH(CityTable[City],
+			    "McAllen", "Hidalgo, Texas, United States",
+			    "Edinburg", "Hidalgo, Texas, United States",
+			    "Mission", "Hidalgo, Texas, United States",
+			    "Pharr", "Hidalgo, Texas, United States",
+			    "San Juan", "Hidalgo, Texas, United States",
+			    "Weslaco", "Hidalgo, Texas, United States",
+			    "Brownsville", "Cameron, Texas, United States",
+			    "San Benito", "Cameron, Texas, United States",
+			    "Harlingen", "Cameron, Texas, United States"
+			)
+		lineageTag: 4bb70091-2718-45c4-b36e-3dde386936c9
+		dataCategory: County
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude =
+			SWITCH(CityTable[City],
+			    "McAllen", 26.2034,
+			    "Edinburg", 26.3017,
+			    "Brownsville", 25.9017,
+			    "Harlingen", 26.1906,
+			    "Mission", 26.2159,
+			    "Pharr", 26.1948,
+			    "San Benito", 26.1306,
+			    "San Juan", 26.1892,
+			    "Weslaco", 26.1595
+			)
+		lineageTag: 13a965b2-7804-4e3c-91ab-0dc54fd5037e
+		dataCategory: Latitude
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitude =
+			SWITCH(CityTable[City],
+			    "McAllen", -98.2300,
+			    "Edinburg", -98.1633,
+			    "Brownsville", -97.4975,
+			    "Harlingen", -97.6961,
+			    "Mission", -98.3251,
+			    "Pharr", -98.1836,
+			    "San Benito", -97.6311,
+			    "San Juan", -98.1561,
+			    "Weslaco", -97.9908
+			)
+		lineageTag: d259cf58-3bae-447a-a0a4-8f120ff7e118
+		dataCategory: Longitude
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'City Full' =
+			SWITCH(CityTable[City],
+			    "McAllen", "McAllen, Hidalgo County, Texas",
+			    "Edinburg", "Edinburg, Hidalgo County, Texas",
+			    "Mission", "Mission, Hidalgo County, Texas",
+			    "Pharr", "Pharr, Hidalgo County, Texas",
+			    "San Juan", "San Juan, Hidalgo County, Texas",
+			    "Weslaco", "Weslaco, Hidalgo County, Texas",
+			    "Brownsville", "Brownsville, Cameron County, Texas",
+			    "San Benito", "San Benito, Cameron County, Texas",
+			    "Harlingen", "Harlingen, Cameron County, Texas"
+			)
+		lineageTag: 37a4ef30-8fd0-4d9d-ab43-3d002983d316
+		dataCategory: City
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CityTable = calculated
+		mode: import
+		source = DISTINCT(Employment[City])
+
+	annotation PBI_Id = 97c4b96872974c47b596215688d41132
+

@@ -1,0 +1,34 @@
+relationship c2c61a0a-fd5e-1fcc-286a-fb5876ddaf19
+	fromColumn: 'Labor Force'.Date
+	toColumn: DateTable.Date
+
+relationship c9134d42-c8f3-307d-615d-e9d94ddef963
+	fromColumn: 'Unemployment Rate'.Date
+	toColumn: DateTable.Date
+
+relationship 1b7808e0-04df-7122-2430-78e961de6b11
+	fromColumn: 'Labor Force'.City
+	toColumn: CityTable.City
+
+relationship d14b1db1-7591-593e-907c-72c7b72b2217
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Unemployment Rate'.City
+	toColumn: CityTable.City
+
+relationship b6390916-cfe8-4af9-e93b-f3946bb279de
+	fromColumn: Employment.City
+	toColumn: CityTable.City
+
+relationship 0bb7a7f6-d2b3-0734-8df6-50133a44816a
+	fromColumn: Employment.Date
+	toColumn: DateTable.Date
+
+relationship beccc151-2787-a5e3-01e0-8a4ff7040f02
+	fromColumn: Unemployment.Date
+	toColumn: DateTable.Date
+
+relationship b7fd5f11-4cb6-4630-994d-acd2f0deb735
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DateTable.Date
+	toColumn: LocalDateTable_b59f9824-ee4a-4a9d-80bb-97c30aebf29e.Date
+

@@ -1,0 +1,99 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 37.202780999999938,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 84.0763407196506,
+            "y": 426.427940550325
+          },
+          "nodeIndex": "Employment",
+          "nodeLineageTag": "c65e71c5-eeca-4ae9-85e4-05048b60bcfa",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 455.764649822874,
+            "y": -50
+          },
+          "nodeIndex": "Labor Force",
+          "nodeLineageTag": "55107ed6-8c4a-4e4b-ab5e-a569778e4f68",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 106.63005268311144
+          },
+          "nodeIndex": "Unemployment",
+          "nodeLineageTag": "472dd968-78c8-496e-8413-9d2ad8024774",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 369.31334573700013,
+            "y": 386.9684460169816
+          },
+          "nodeIndex": "Unemployment Rate",
+          "nodeLineageTag": "dcbb0986-7a17-46c0-b91d-62674ed407f9",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 675.592161822874,
+            "y": 630.12524327516223
+          },
+          "nodeIndex": "DateTable",
+          "nodeLineageTag": "fe45b48c-8f05-4b78-82ac-6914df4ec0df",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 923.76464982287393,
+            "y": 288.21397027516252
+          },
+          "nodeIndex": "CityTable",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 56.447393005377833,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

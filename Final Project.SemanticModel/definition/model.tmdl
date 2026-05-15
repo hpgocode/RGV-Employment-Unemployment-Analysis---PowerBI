@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Employment","Labor Force","Unemployment Rate","Unemployment"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Employment
+ref table 'Labor Force'
+ref table 'Unemployment Rate'
+ref table Unemployment
+ref table DateTable
+ref table CityTable
+ref table DateTableTemplate_c12d5e8f-3470-4c75-b8ba-d121d4be1b06
+ref table LocalDateTable_b59f9824-ee4a-4a9d-80bb-97c30aebf29e
+
+ref cultureInfo en-US
+

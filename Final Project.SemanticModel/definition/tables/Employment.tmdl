@@ -1,0 +1,136 @@
+table Employment
+	lineageTag: c65e71c5-eeca-4ae9-85e4-05048b60bcfa
+
+	measure 'Unemployment Rate %' =
+			
+			DIVIDE(SUM('Unemployment'[Unemployment]), SUM('Labor Force'[Labor Force])) * 100
+		lineageTag: e8704fe8-3487-45af-9a2d-7677519033b0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Employment Growth %' =
+			
+			VAR StartValue = CALCULATE(AVERAGE(Employment[Empolyment]), YEAR(Employment[Date]) = 2005)
+			VAR CurrentValue = AVERAGE(Employment[Empolyment])
+			RETURN DIVIDE(CurrentValue - StartValue, StartValue) * 100
+		lineageTag: f4280e71-b1f2-414b-991a-7fd24dd20fb0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Employment Growth % 2' = ```
+			
+			VAR StartValue = CALCULATE(
+			    AVERAGE(Employment[Empolyment]), 
+			    ALL(DateTable),
+			    YEAR(Employment[Date]) = 2005
+			)
+			VAR CurrentValue = CALCULATE(
+			    AVERAGE(Employment[Empolyment]),
+			    ALL(DateTable)
+			)
+			RETURN DIVIDE(CurrentValue - StartValue, StartValue) * 100
+			```
+		lineageTag: bfba8538-fb81-4f88-8744-b52fde8d67c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d0c56cb9-f286-43b6-a610-d9977749e80a
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'United States'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 796e03cf-0b24-4baf-b24a-746bb2ab3868
+		summarizeBy: sum
+		sourceColumn: United States
+
+		annotation SummarizationSetBy = Automatic
+
+	column Texas
+		dataType: int64
+		formatString: #,0
+		lineageTag: ca727a09-4166-41f7-a8dd-ce0700b69707
+		summarizeBy: sum
+		sourceColumn: Texas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custom
+		dataType: string
+		lineageTag: df376685-e8e7-4d26-bbd6-939f26c7d90a
+		summarizeBy: none
+		sourceColumn: Custom
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 5f0a3c11-4d83-44c7-aad3-3145065e5004
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Empolyment
+		dataType: int64
+		formatString: #,0
+		lineageTag: f4e6a377-4a86-43e0-8919-2540757d9803
+		summarizeBy: sum
+		sourceColumn: Empolyment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Employment = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\marci\Downloads\696_LausCITY2005.xlsx"), null, true),
+				    Employment_Sheet = Source{[Item="Employment",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Employment_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", Int64.Type}, {"United States", Int64.Type}, {"Texas", Int64.Type}, {"Abilene", Int64.Type}, {"Allen", Int64.Type}, {"Alvin", Int64.Type}, {"Amarillo", Int64.Type}, {"Anna", Int64.Type}, {"Arlington", Int64.Type}, {"Austin", Int64.Type}, {"Balch Springs", Int64.Type}, {"Baytown", Int64.Type}, {"Beaumont", Int64.Type}, {"Bedford", Int64.Type}, {"Belton", Int64.Type}, {"Big Spring", Int64.Type}, {"Brownsville", Int64.Type}, {"Bryan", Int64.Type}, {"Burleson", Int64.Type}, {"Carrollton", Int64.Type}, {"Cedar Hill", Int64.Type}, {"Cedar Park", Int64.Type}, {"Celina", Int64.Type}, {"Cibolo", Int64.Type}, {"Cleburne", Int64.Type}, {"College Station", Int64.Type}, {"Colleyville", Int64.Type}, {"Conroe", Int64.Type}, {"Converse", Int64.Type}, {"Coppell", Int64.Type}, {"Copperas Cove", Int64.Type}, {"Corpus Christi", Int64.Type}, {"Corsicana", Int64.Type}, {"Dallas", Int64.Type}, {"Deer Park", Int64.Type}, {"Del Rio", Int64.Type}, {"Denison", Int64.Type}, {"Denton", Int64.Type}, {"DeSoto", Int64.Type}, {"Duncanville", Int64.Type}, {"Eagle Pass", Int64.Type}, {"Edinburg", Int64.Type}, {"El Paso", Int64.Type}, {"Euless", Int64.Type}, {"Farmers Branch", Int64.Type}, {"Fate", Int64.Type}, {"Flower Mound", Int64.Type}, {"Forney", Int64.Type}, {"Fort Worth", Int64.Type}, {"Friendswood", Int64.Type}, {"Frisco", Int64.Type}, {"Fulshear", Int64.Type}, {"Galveston", Int64.Type}, {"Garland", Int64.Type}, {"Georgetown", Int64.Type}, {"Grand Prairie", Int64.Type}, {"Grapevine", Int64.Type}, {"Greenville", Int64.Type}, {"Haltom City", Int64.Type}, {"Harker Heights", Int64.Type}, {"Harlingen", Int64.Type}, {"Houston", Int64.Type}, {"Huntsville", Int64.Type}, {"Hurst", Int64.Type}, {"Hutto", Int64.Type}, {"Irving", Int64.Type}, {"Katy", Int64.Type}, {"Keller", Int64.Type}, {"Kerrville", Int64.Type}, {"Killeen", Int64.Type}, {"Kingsville", Int64.Type}, {"Kyle", Int64.Type}, {"La Porte", Int64.Type}, {"Lake Jackson", Int64.Type}, {"Lancaster", Int64.Type}, {"Laredo", Int64.Type}, {"League City", Int64.Type}, {"Leander", Int64.Type}, {"Lewisville", Int64.Type}, {"Little Elm", Int64.Type}, {"Longview", Int64.Type}, {"Lubbock", Int64.Type}, {"Lufkin", Int64.Type}, {"Mansfield", Int64.Type}, {"McAllen", Int64.Type}, {"McKinney", Int64.Type}, {"Melissa", Int64.Type}, {"Mesquite", Int64.Type}, {"Midland", Int64.Type}, {"Midlothian", Int64.Type}, {"Mission", Int64.Type}, {"Missouri City", Int64.Type}, {"Nacogdoches", Int64.Type}, {"New Braunfels", Int64.Type}, {"North Richland Hills", Int64.Type}, {"Odessa", Int64.Type}, {"Paris", Int64.Type}, {"Pasadena", Int64.Type}, {"Pearland", Int64.Type}, {"Pflugerville", Int64.Type}, {"Pharr", Int64.Type}, {"Plano", Int64.Type}, {"Port Arthur", Int64.Type}, {"Princeton", Int64.Type}, {"Prosper", Int64.Type}, {"Richardson", Int64.Type}, {"Rockwall", Int64.Type}, {"Rosenberg", Int64.Type}, {"Round Rock", Int64.Type}, {"Rowlett", Int64.Type}, {"Royse City", Int64.Type}, {"Sachse", Int64.Type}, {"Saginaw", Int64.Type}, {"San Angelo", Int64.Type}, {"San Antonio", Int64.Type}, {"San Benito", Int64.Type}, {"San Juan", Int64.Type}, {"San Marcos", Int64.Type}, {"Schertz", Int64.Type}, {"Seguin", Int64.Type}, {"Sherman", Int64.Type}, {"Socorro", Int64.Type}, {"Southlake", Int64.Type}, {"Sugar Land", Int64.Type}, {"Temple", Int64.Type}, {"Texarkana", Int64.Type}, {"Texas City", Int64.Type}, {"The Colony", Int64.Type}, {"Tyler", Int64.Type}, {"University Park", Int64.Type}, {"Victoria", Int64.Type}, {"Waco", Int64.Type}, {"Waxahachie", Int64.Type}, {"Weatherford", Int64.Type}, {"Weslaco", Int64.Type}, {"Wichita Falls", Int64.Type}, {"Wylie", Int64.Type}, {"Column138", type any}, {"Column139", type any}, {"Column140", type any}, {"Column141", type any}, {"Column142", type any}, {"Column143", type any}, {"Column144", type any}, {"Column145", type any}, {"Column146", type any}, {"Column147", type any}, {"Column148", type any}, {"Column149", type any}, {"Column150", type any}, {"Column151", type any}, {"Column152", type any}, {"Column153", type any}, {"Column154", type any}, {"Column155", type any}, {"Column156", type any}, {"Column157", type any}, {"Column158", type any}, {"Column159", type any}, {"Column160", type any}, {"Column161", type any}, {"Column162", type any}, {"Column163", type any}, {"Column164", type any}, {"Column165", type any}, {"Column166", type any}, {"Column167", type any}, {"Column168", type any}, {"Column169", type any}, {"Column170", type any}, {"Column171", type any}, {"Column172", type any}, {"Column173", type any}, {"Column174", type any}, {"Column175", type any}, {"Column176", type any}, {"Column177", type any}, {"Column178", type any}, {"Column179", type any}, {"Column180", type any}, {"Column181", type any}, {"Column182", type any}, {"Column183", type any}, {"Column184", type any}, {"Column185", type any}, {"Column186", type any}, {"Column187", type any}, {"Column188", type any}, {"Column189", type any}, {"Column190", type any}, {"Column191", type any}, {"Column192", type any}, {"Column193", type any}, {"Column194", type any}, {"Column195", type any}, {"Column196", type any}, {"Column197", type any}, {"Column198", type any}, {"Column199", type any}, {"Column200", type any}, {"Column201", type any}, {"Column202", type any}, {"Column203", type any}, {"Column204", type any}, {"Column205", type any}, {"Column206", type any}, {"Column207", type any}, {"Column208", type any}, {"Column209", type any}, {"Column210", type any}, {"Column211", type any}, {"Column212", type any}, {"Column213", type any}, {"Column214", type any}, {"Column215", type any}, {"Column216", type any}, {"Column217", type any}, {"Column218", type any}, {"Column219", type any}, {"Column220", type any}, {"Column221", type any}, {"Column222", type any}, {"Column223", type any}, {"Column224", type any}, {"Column225", type any}, {"Column226", type any}, {"Column227", type any}, {"Column228", type any}, {"Column229", type any}, {"Column230", type any}, {"Column231", type any}, {"Column232", type any}, {"Column233", type any}, {"Column234", type any}, {"Column235", type any}, {"Column236", type any}, {"Column237", type any}, {"Column238", type any}, {"Column239", type any}, {"Column240", type any}, {"Column241", type any}, {"Column242", type any}, {"Column243", type any}, {"Column244", type any}, {"Column245", type any}, {"Column246", type any}, {"Column247", type any}, {"Column248", type any}, {"Column249", type any}, {"Column250", type any}, {"Column251", type any}, {"Column252", type any}, {"Column253", type any}, {"Column254", type any}, {"Column255", type any}, {"Column256", type any}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Anna", "Austin"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns",{{"Date", type date}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type1",{"Abilene", "Allen", "Alvin", "Amarillo", "Arlington", "Balch Springs", "Baytown", "Beaumont", "Bedford", "Belton", "Big Spring", "Bryan", "Burleson", "Carrollton", "Cedar Hill", "Cedar Park", "Celina", "Cibolo", "Cleburne", "College Station", "Colleyville", "Conroe", "Converse", "Coppell", "Copperas Cove", "Corsicana", "Dallas", "Deer Park", "Del Rio", "Denison", "Denton", "DeSoto", "Duncanville", "Eagle Pass", "El Paso", "Euless", "Farmers Branch", "Fate", "Flower Mound", "Forney", "Fort Worth", "Friendswood", "Frisco", "Fulshear", "Galveston", "Garland", "Georgetown", "Grand Prairie", "Grapevine", "Greenville", "Haltom City", "Harker Heights", "Houston", "Huntsville", "Hurst", "Hutto", "Irving", "Katy", "Keller", "Kerrville", "Killeen", "Kingsville", "Kyle", "La Porte", "Lake Jackson", "Lancaster", "Laredo", "League City", "Leander", "Lewisville", "Little Elm", "Longview", "Lubbock", "Lufkin", "Mansfield", "McKinney", "Melissa", "Mesquite", "Midland", "Midlothian", "Missouri City", "Nacogdoches", "New Braunfels", "North Richland Hills", "Odessa", "Paris", "Pasadena", "Pearland", "Pflugerville", "Plano", "Port Arthur", "Princeton", "Prosper", "Richardson", "Rockwall", "Rosenberg", "Round Rock", "Rowlett", "Royse City", "Sachse", "Saginaw", "San Angelo", "San Antonio", "San Marcos", "Schertz", "Seguin", "Sherman", "Socorro", "Southlake", "Sugar Land", "Temple", "Texarkana", "Texas City", "The Colony", "Tyler", "University Park", "Victoria", "Waco", "Waxahachie", "Weatherford", "Wichita Falls", "Wylie", "Column138", "Column139", "Column140", "Column141", "Column142", "Column143", "Column144", "Column145", "Column146", "Column147", "Column148", "Column149", "Column150", "Column151", "Column152", "Column153", "Column154", "Column155", "Column156", "Column157", "Column158", "Column159", "Column160", "Column161", "Column162", "Column163", "Column164", "Column165", "Column166", "Column167", "Column168", "Column169", "Column170", "Column171", "Column172", "Column173", "Column174", "Column175", "Column176", "Column177", "Column178", "Column179", "Column180", "Column181", "Column182", "Column183", "Column184", "Column185", "Column186", "Column187", "Column188", "Column189", "Column190", "Column191", "Column192", "Column193", "Column194", "Column195", "Column196", "Column197", "Column198", "Column199", "Column200", "Column201", "Column202", "Column203", "Column204", "Column205", "Column206", "Column207", "Column208", "Column209", "Column210", "Column211", "Column212", "Column213", "Column214", "Column215", "Column216", "Column217", "Column218", "Column219", "Column220", "Column221", "Column222", "Column223", "Column224", "Column225", "Column226", "Column227", "Column228", "Column229", "Column230", "Column231", "Column232", "Column233", "Column234", "Column235", "Column236", "Column237", "Column238", "Column239", "Column240", "Column241", "Column242", "Column243", "Column244", "Column245", "Column246", "Column247", "Column248", "Column249", "Column250", "Column251", "Column252", "Column253", "Column254", "Column255", "Column256", "Corpus Christi"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Columns1", "Custom", each if [City] = "Brownsville" then "Cameron"
+				else if [City] = "Harlingen" then "Cameron"
+				else if [City] = "San Benito" then "Cameron"
+				else if [City] = "Edinburg" then "Hidalgo"
+				else if [City] = "McAllen" then "Hidalgo"
+				else if [City] = "Mc Allen" then "Hidalgo"
+				else if [City] = "Mission" then "Hidalgo"
+				else if [City] = "Pharr" then "Hidalgo"
+				else if [City] = "San Juan" then "Hidalgo"
+				else if [City] = "Weslaco" then "Hidalgo"
+				else "Other"),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Added Custom",{"Custom"}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Columns2", {"Date", "United States", "Texas"}, "Attribute", "Value"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "City"}, {"Value", "Empolyment"}}),
+				    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Custom", each if [City] = "Brownsville" then "Cameron"
+				else if [City] = "Harlingen" then "Cameron"
+				else if [City] = "San Benito" then "Cameron"
+				else if [City] = "Edinburg" then "Hidalgo"
+				else if [City] = "McAllen" then "Hidalgo"
+				else if [City] = "Mc Allen" then "Hidalgo"
+				else if [City] = "Mission" then "Hidalgo"
+				else if [City] = "Pharr" then "Hidalgo"
+				else if [City] = "San Juan" then "Hidalgo"
+				else if [City] = "Weslaco" then "Hidalgo"
+				else "Other"),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Custom1",{"Date", "United States", "Texas", "Custom", "City", "Empolyment"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

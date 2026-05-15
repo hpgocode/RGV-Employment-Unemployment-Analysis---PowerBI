@@ -1,0 +1,148 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "5bb8c8ba5a6fdc167ad1",
+  "position": {
+    "x": 82.98093587521663,
+    "y": 411.7850953206239,
+    "z": 8000,
+    "height": 286.37781629116114,
+    "width": 492.27036395147309,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CityTable"
+                    }
+                  },
+                  "Property": "County"
+                }
+              },
+              "queryRef": "CityTable.County",
+              "nativeQueryRef": "County",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CityTable"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "CityTable.City",
+              "nativeQueryRef": "City",
+              "active": true
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "CityTable"
+                        }
+                      },
+                      "Property": "County"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(CityTable.County)",
+              "nativeQueryRef": "First County"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employment"
+                    }
+                  },
+                  "Property": "Employment Growth % 2"
+                }
+              },
+              "queryRef": "Employment.Employment Growth % 2",
+              "nativeQueryRef": "Employment Growth % 2"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Employment"
+                  }
+                },
+                "Property": "Employment Growth % 2"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 8,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Employment Growth % by City (Since 2005)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
