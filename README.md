@@ -26,3 +26,9 @@ An interactive Power BI data analytics case study examining long-term labor mark
 1. **Target Workforce Development:** Focus immediate local business incentives and upskilling programs directly within lowest-growth, highest-unemployment areas (**San Benito & San Juan**).
 2. **Replicate Edinburg's Playbook:** Conduct a structural economic study on Edinburg's **43.91% growth** model to identify policies, infrastructure investments, or business factors that can be scaled to neighboring municipalities.
 3. **Build Economic Resiliency Buffers:** Advise regional planning committees to establish localized economic shock absorbers to mitigate the historical 30–50% downturn amplification pattern.
+
+## Repository Schema & Source Files
+* **`Final Project.pbip`** – The core project definition file that links the report layout to the semantic data model.
+* **`Final Project.Report/`** – The front-end layout folder containing canvas configurations, visual styles, and page definitions (`report.json`).
+* **`Final Project.SemanticModel/`** – The back-end data model folder containing the table relationships, BIM schema definition (`model.bim`)
+* **`images/`** – Storage directory containing interface captures and dashboard documentation assets.
